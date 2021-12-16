@@ -3,10 +3,10 @@ AR=ar
 FLAGS= -Wall -g
 .PHONY: all clean
 
-all: stringProg.out
+all: stringProg
 
-stringProg.out: string_actions.c
-	$(CC) $(FLAGS) string_actions.c -o stringProg.out
+stringProg: string_actions.c
+	$(CC) $(FLAGS) string_actions.c -o stringProg
 
 clean:
-	rm -f *.o *.a *.so *.out
+	rm -f *.o *.a *.so *.out stringProg
