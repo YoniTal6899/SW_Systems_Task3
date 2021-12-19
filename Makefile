@@ -5,8 +5,8 @@ FLAGS= -Wall -g
 
 all: stringProg
 
-stringProg: string_actions.c
-	$(CC) $(FLAGS) string_actions.c -o stringProg
+stringProg: main2.c
+	$(CC) $(FLAGS) main2.c -o stringProg
 
 run:
 	gcc string_actions.c
