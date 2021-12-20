@@ -304,6 +304,7 @@ int main()
     printf("Atbash Sequences: ");
     atbash(word);
     AT_S(text);
+    printf("\n");
     printf("Anagram Sequences: ");
     Anagram(word,text);    
     return 0;
