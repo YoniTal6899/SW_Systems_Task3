@@ -224,41 +224,44 @@ void Anagram(char w[WORD],char t[TXT]){
     char m[TXT];
     int mindex=0;
     memset(m,0,TXT);
+    int start = 1;
     for (int i = 0; i < strlen(t); i++)
-    {
-        if(InitRem && t[i]==' ') continue;
-        if(isFinished(remaining)){
-            InitRem+=1;
-            printf("Finised! --> i = %d InitRem = %d\n",i,InitRem);
-            print_matchT(m,TXT);
-            tm++;
-            InitRemaining(remaining,w);
-            mindex=0;
-            memset(m,0,TXT);
+    {   
+        if(start && t[i]==' '){ 
             continue;
         }
+        // if(isFinished(remaining)){
+        //     InitRem+=1;
+        //     printf("Finised! --> i = %d InitRem = %d\n",i,InitRem);
+        //     print_matchT(m,TXT);
+        //     tm++;
+        //     InitRemaining(remaining,w);
+        //     mindex=0;
+        //     memset(m,0,TXT);
+        //     continue;
+        //}
         if (match(remaining,t[i])){
-            InitRem=0;
+            start=0;
             m[mindex]=t[i];
             mindex++;
             if(isFinished(remaining)){
-                InitRem+=1;
+                start=1;
                 print_matchT(m,TXT);
                 tm++;
                 InitRemaining(remaining,w);
                 mindex=0;
                 memset(m,0,TXT);
-                continue;
             }
         }
         else{
+            start=1;
             i=i-mindex;
             mindex=0;
             memset(m,0,TXT);
             InitRemaining(remaining,w);
         }
-    } 
-}
+    }
+} 
 
 
 int main()
@@ -301,7 +304,7 @@ int main()
     printf("Atbash Sequences: ");
     atbash(word);
     AT_S(text);
-    printf("\n");
+    printf("here \n");
     printf("Anagram Sequences: ");
     Anagram(word,text);    
     return 0;
