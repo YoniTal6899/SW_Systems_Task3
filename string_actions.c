@@ -35,12 +35,8 @@ int word_val(char w[WORD])
 }
 void print_match(char m[WORD], int len)
 {
-    if(tm>0) printf("~");  
-    for(int i=0; i<len; i++)
-    {
-        printf("%c",m[i]);
-    }
-
+    if(tm>0) printf("~");
+    printf("%s",m);
     memset(m, 0, len);
 }
 
@@ -151,7 +147,8 @@ void AT_S(char t[TXT])
             continue;
         }
         int tempI=i;
-        for (int j = 0; j < strlen(atb); j++)
+        int j = 0;
+        for (; j < strlen(atb); j++)
         {
             while (t[j+tempI]==' ')
             {
@@ -161,6 +158,7 @@ void AT_S(char t[TXT])
         }
        if (wordCheck(check))
        {
+           check[j]='\0';
            print_match(check,WORD);
             tm++;
        }
@@ -198,16 +196,6 @@ int match(char* remaining,char c){
     return 0;    
 }
 
-void print_matchT(char m[WORD], int len)
-{
-    if(tm>0) printf("~");  
-    for(int i=0; i<len; i++)
-    {
-        printf("%c",m[i]);
-    }
-
-    memset(m, 0, len);
-}
 void InitRemaining(char* r, char w[WORD])
 {
     memset(r,0,WORD);
@@ -230,23 +218,14 @@ void Anagram(char w[WORD],char t[TXT]){
         if(start && t[i]==' '){ 
             continue;
         }
-        // if(isFinished(remaining)){
-        //     InitRem+=1;
-        //     printf("Finised! --> i = %d InitRem = %d\n",i,InitRem);
-        //     print_matchT(m,TXT);
-        //     tm++;
-        //     InitRemaining(remaining,w);
-        //     mindex=0;
-        //     memset(m,0,TXT);
-        //     continue;
-        //}
         if (match(remaining,t[i])){
             start=0;
             m[mindex]=t[i];
             mindex++;
             if(isFinished(remaining)){
                 start=1;
-                print_matchT(m,TXT);
+                m[mindex]='\0';
+                print_match(m,WORD);
                 tm++;
                 InitRemaining(remaining,w);
                 mindex=0;
