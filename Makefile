@@ -25,8 +25,8 @@ all: stringProg
 clean: 
 	rm -f *.o *.a *.so stringProg
 
-stringProg: main2.o
-	$(CC) $(FLAGS) -o stringProg main2.c
+stringProg: string_actions.o
+	$(CC) $(FLAGS) -o stringProg string_actions.c
 
-main2.o: main2.c 
-	$(CC) $(FLAGS) -c main2.c
+string_actions.o: string_actions.c 
+	$(CC) $(FLAGS) -c string_actions.c
