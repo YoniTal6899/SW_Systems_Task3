@@ -191,7 +191,6 @@ int match(char* remaining,char c){
     {
         if (c==remaining[i])
         {
-            InitRem=0;
             remaining[i] = ' ';
             return 1;
         }        
@@ -211,12 +210,12 @@ void print_matchT(char m[WORD], int len)
 }
 void InitRemaining(char* r, char w[WORD])
 {
+    memset(r,0,WORD);
     r[0]=' ';
     for(int i=1; i<=strlen(w);i++)
     {
         r[i]=w[i-1];
     }
-    InitRem=1;
 }
 void Anagram(char w[WORD],char t[TXT]){
     char remaining[WORD];
@@ -229,15 +228,28 @@ void Anagram(char w[WORD],char t[TXT]){
     {
         if(InitRem && t[i]==' ') continue;
         if(isFinished(remaining)){
+            InitRem+=1;
+            printf("Finised! --> i = %d InitRem = %d\n",i,InitRem);
             print_matchT(m,TXT);
             tm++;
             InitRemaining(remaining,w);
             mindex=0;
+            memset(m,0,TXT);
             continue;
         }
         if (match(remaining,t[i])){
+            InitRem=0;
             m[mindex]=t[i];
             mindex++;
+            if(isFinished(remaining)){
+                InitRem+=1;
+                print_matchT(m,TXT);
+                tm++;
+                InitRemaining(remaining,w);
+                mindex=0;
+                memset(m,0,TXT);
+                continue;
+            }
         }
         else{
             i=i-mindex;
